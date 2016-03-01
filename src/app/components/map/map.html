@@ -1,0 +1,16 @@
+<ui-gmap-google-map
+  center="map.center"
+  zoom="map.zoom"
+  >
+  <ui-gmap-marker
+    ng-if="marker.visible"
+    ng-repeat="marker in vm.mapData.rows"
+    coords="{ latitude: marker.cells[vm.latColumn], longitude: marker.cells[vm.lngColumn] }"
+    click="onMarkerClicked(marker)"
+    idKey="'marker-' + $index">
+     <ui-gmap-window
+      isIconVisibleOnClick="true">
+       <p>{{ marker.cells[vm.labelColumn] }}</p>
+     </ui-gmap-window>
+  </ui-gmap-marker>
+</ui-gmap-google-map>

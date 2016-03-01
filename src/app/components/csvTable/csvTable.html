@@ -1,0 +1,50 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead ng-if="vm.headers">
+      <th>
+        <i class="glyphicon glyphicon-eye-open"></i>
+      </th>
+      <th
+        ng-cloak
+        ng-repeat="column in vm.headers track by $index"
+        ng-click="vm.sortThis($index)">
+        {{ column }}
+        <i class="glyphicon glyphicon-sort"></i>
+      </th>
+    </thead>
+    <tbody>
+      <tr
+        ng-repeat="row in vm.rows | orderBy:vm.sortColumn track by $index">
+        <td>
+          <input
+            type="checkbox"
+            ng-model="row.visible"
+            ng-checked="row.visible"
+            ng-init="row.visible=true">
+        </td>
+        <td
+          ng-repeat="cell in row.cells">
+          <span
+            ng-cloak
+            ng-hide="vm.isThisImage(cell) || vm.isThisUrl(cell)">
+            {{ cell }}
+          </span>
+
+          <span
+            ng-cloak
+            ng-if="vm.isThisImage(cell)">
+            <img
+              class="img-responsive marker-preview"
+              ng-src="{{ cell }}">
+          </span>
+
+          <span
+            ng-cloak
+            ng-if="vm.isThisUrl(cell) && !vm.isThisImage(cell)">
+            <a ng-href="{{ cell }}" ng-bind="cell"></a>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

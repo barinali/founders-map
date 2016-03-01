@@ -1,0 +1,134 @@
+<div class="container container--white">
+  <div class="row">
+    <div class="col-xs-12">
+
+      <h1 class="text-center">Founder's Map</h1>
+
+      <div
+        map
+        class="map"
+        map-data="main.csvObject"
+        lat-column="main.latitudeColumn"
+        lng-column="main.longitudeColumn"
+        label-column="main.labelColumn">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <table
+        csv-table
+        rows="main.csvObject.rows"
+        headers="main.csvObject.headers">
+      </table>
+    </div>
+  </div>
+
+  <div
+    class="row"
+    ng-show="main.csvObject">
+    <div class="col-sm-4 col-xs-12">
+      <div class="form-group">
+        <label for="label">
+          Select column to show data in marker's label
+        </label>
+
+        <select
+          id="label"
+          class="form-control"
+          ng-model="main.labelColumn">
+          <option
+            ng-repeat="head in main.csvObject.headers"
+            ng-value="$index"
+            ng-bind="head">
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-sm-4 col-xs-12">
+      <div class="form-group">
+        <label for="latitude">
+          Select column for latitude of markers
+        </label>
+
+        <select
+          id="latitude"
+          class="form-control"
+          ng-model="main.latitudeColumn">
+          <option
+            ng-repeat="head in main.csvObject.headers"
+            ng-value="$index"
+            ng-bind="head">
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-sm-4 col-xs-12">
+      <div class="form-group">
+        <label for="longitude">
+          Select column for longitude of markers
+        </label>
+
+        <select
+          id="longitude"
+          class="form-control"
+          ng-model="main.longitudeColumn">
+          <option
+            ng-repeat="head in main.csvObject.headers"
+            ng-value="$index"
+            ng-bind="head">
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <label for="csv-input">
+        CSV Data for map
+      </label>
+
+      <textarea
+        id="csv-input"
+        class="csv-input form-control"
+        ng-model="main.csvData">
+      </textarea>
+    </div>
+
+    <div class="col-sm-4 col-xs-12">
+      <br>
+
+      <button
+        class="btn btn-warning"
+        ng-show="main.csvObject"
+        ng-click="main.resetCsv()">Reset!</button>
+
+      <button
+        ng-click="main.submitCsv()"
+        ng-show="!main.csvObject"
+        class="btn btn-danger">Submit CSV!</button>
+    </div>
+
+    <div class="col-sm-3 col-xs-12">
+      <div class="form-group">
+        <label for="longitude">
+          Select seperator for csv data
+        </label>
+
+        <select
+          id="longitude"
+          class="form-control"
+          ng-model="main.seperator">
+          <option value="," selected>,</option>
+          <option value=";">;</option>
+          <option value="  ">  (tab)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+</div>
