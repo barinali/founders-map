@@ -24,13 +24,15 @@ class CsvTableController {
   }
 
   switchSort() {
-    return this.sortColumn == 'sort' ? '-sort' : 'sort';
+    this.sortColumn = this.sortColumn == 'sort' ? '-sort' : 'sort';
   }
 
   sortThis($index) {
     if ($index === this.sortColumnIndex) {
       return this.switchSort();
     }
+
+    this.sortColumnIndex = $index;
 
     for (let index in this.rows) {
       this.rows[index].sort = this.rows[index].cells[$index]
