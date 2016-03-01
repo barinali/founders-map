@@ -24,39 +24,62 @@
       longitude: -122.190191
     }
 
+    center = {
+      latitude: 0,
+      longitude: 0
+    }
+
     scope.map = {
       "center": center,
-      "zoom": 11
+      "zoom": 10
     }
   }
 }
 
 class MapController {
-  constructor () {
+  constructor ($scope) {
     'ngInject';
 
-    /*
+    const self = this;
+    this.scope = $scope;
 
     $scope.$watch(function(){
       return self.mapData;
     }, (newValue, oldValue) => {
-      if ( newValue !== oldValue) {
-        let bound = new google.maps.LatLngBounds();
-        for (let index = 0; index < this.mapData.rows.length; index++) {
-          bound.extend(new google.maps.LatLng(this.mapData.rows[index][9], this.mapData.rows[index][10]));
-        }
-
-        let center = bound.getCenter();
-
-        $scope.map.center = {
-          latitude: center.lat(),
-          longitude: center.lng()
-        };
+      if (newValue !== oldValue) {
+        this.updateCenter();
       }
     }, true);
-    */
 
-    // "this.creation" is available by directive option "bindToController: true"
-    //this.relativeDate = moment(this.creationDate).fromNow();
+    $scope.$watch(function() {
+      return self.latColumn;
+    }, (newValue, oldValue) => {
+      if (newValue !== oldValue) {
+        this.updateCenter();
+      }
+    });
+
+    $scope.$watch(function() {
+      return self.lngColumn;
+    }, (newValue, oldValue) => {
+      if (newValue !== oldValue) {
+        this.updateCenter();
+      }
+    });
+  }
+
+  updateCenter() {
+    let bound = new google.maps.LatLngBounds();
+    for (let index = 0; index < this.mapData.rows.length; index++) {
+      let cells = this.mapData.rows[index].cells;
+      bound.extend(new google.maps.LatLng(cells[this.latColumn], cells[this.lngColumn]));
+    }
+
+    let center = bound.getCenter();
+
+    this.scope.map.center = {
+      latitude: center.lat(),
+      longitude: center.lng()
+    };
   }
 }
