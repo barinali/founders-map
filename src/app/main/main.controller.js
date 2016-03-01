@@ -15,8 +15,8 @@ export class MainController {
     let rows = this.csvData.split('\n');
 
     let csvObject = {
-      "headers": [],
-      "rows": []
+      headers: [],
+      rows: []
     }
 
     for (let index in rows) {

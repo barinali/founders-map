@@ -30,8 +30,8 @@
     }
 
     scope.map = {
-      "center": center,
-      "zoom": 10
+      center: center,
+      zoom: 10
     }
   }
 }

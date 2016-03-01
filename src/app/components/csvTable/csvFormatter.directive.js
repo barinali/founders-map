@@ -17,8 +17,8 @@ export function CsvFormatter() {
     let rows = value.split('\n');
 
     let csvObject = {
-      "headers": [],
-      "rows": []
+      headers: [],
+      rows: []
     }
 
     for (let index in rows) {
@@ -45,7 +45,7 @@ export function CsvFormatter() {
 
     value.rows = value.rows.join('\n');
 
-    return value.headers + "\n" + value.rows;
+    return value.headers + '\n' + value.rows;
   }
 
   function linkFunc(scope, el, attr, vm) {
